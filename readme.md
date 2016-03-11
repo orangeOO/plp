@@ -2,6 +2,3 @@
 
 毕设作品
 
-### License
-
-All Rights Reserved
