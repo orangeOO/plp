@@ -11,16 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect('auth/login');
-});
-
-Route::get('profile', 'UserController@profile');
+Route::get('/', 'GoodsController@index');
+Route::get('/type/{typeid}', 'GoodsController@index');
 
 Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('/', 'HomeController@index');
-
+Route::resource('goods', 'GoodsController');
+Route::controller('user', 'UserController');

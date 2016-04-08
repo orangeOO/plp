@@ -1,43 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/signin.css">
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<title>个人租借平台-登录</title>
-</head>
+@extends('app')
 
-<body>
-	<div class="container">
-    @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul style="color:red;">
-        @foreach ($errors->all() as $error)
-            <li>{{ $error  }}</li>
-        @endforeach
-        </ul>
-    </div>
-    @endif</li>
-     	<form class="form-signin" method="POST" action="/auth/login">
-            {!! csrf_field() !!}
-	        <h2 class="form-signin-heading">登录个人租借平台</h2>
-	        <label for="inputEmail" class="sr-only">邮件地址</label>
-	        <input name="email" type="email" value="{{ old('email') }}"id="inputEmail" class="form-control" placeholder="请输入邮件地址" required autofocus>
-	        <label for="inputPassword" class="sr-only">密码</label>
-	        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="请输入密码" required>
-	        <div class="checkbox">
-	         	<label>
-	            	<input name="remember" type="checkbox" value="remember-me"> 记住密码
-	          	</label>
-	        </div>
-	        <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
-            <a class="btn btn-lg btn-block" href="/auth/register">去 注 册</a>
-      	</form>
-    </div> <!-- /container -->
-</body>
-</html>
+@section('content')
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">Login</div>
+				<div class="panel-body">
+					@if (count($errors) > 0)
+						<div class="alert alert-danger">
+							<strong>Whoops!</strong> There were some problems with your input.<br><br>
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
+
+					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">邮箱</label>
+							<div class="col-md-6">
+								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">密码</label>
+							<div class="col-md-6">
+								<input type="password" class="form-control" name="password">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="remember"> 保持登录
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<button type="submit" class="btn btn-primary">登录</button>
+
+								<a class="btn btn-link" href="{{ url('/password/email') }}">忘记密码?</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
