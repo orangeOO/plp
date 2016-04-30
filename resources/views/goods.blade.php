@@ -165,7 +165,7 @@
       <p>{{ $goods->description }}</p>
     </div>
 
-    <div class="comments">
+   <!--  <div class="comments">
       <h3>留言</h3>
       <hr>
 
@@ -212,7 +212,7 @@
           <p><span class="created-time">2016-04-06 13:25:21</span><span class="reply-button"><a href="">回复</a></span></p>
         </div>
       </div>
-    </div>
+    </div> -->
 
   </div>
 

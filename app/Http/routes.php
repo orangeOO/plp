@@ -13,6 +13,7 @@
 
 Route::get('/', 'GoodsController@index');
 Route::get('/type/{typeid}', 'GoodsController@index');
+Route::get('/search', 'GoodsController@search');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -21,3 +22,4 @@ Route::controllers([
 
 Route::resource('goods', 'GoodsController');
 Route::controller('user', 'UserController');
+Route::controller('admin', 'AdminController');

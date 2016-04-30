@@ -13,6 +13,10 @@ use Auth, Input, Redirect;
 
 class GoodsController extends Controller {
 
+	public function __construct() {
+		$this->middleware('auth');	//必须登录
+	}
+
 	/**
 	 * 展示网站首页
 	 *
@@ -184,6 +188,13 @@ class GoodsController extends Controller {
 		$goods = Goods::find($id);
 		$goods->delete();
 		return Redirect::back()->withInfo('成功删除了一个物品');
+	}
+
+	public function search() {
+		$keyword = Input::get('key', '');
+		$searchword = '%' . $keyword . '%';
+		$results = Goods::whereRaw('title like ? or description like ?', [$searchword, $searchword])->get();
+		return view('search')->withGoodses($results)->withKeyword($keyword);
 	}
 
 }

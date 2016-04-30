@@ -21,27 +21,11 @@
     <nav class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">个人租借平台</a>
-          <form method="GET" action="/search" class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input name="key" type="text" class="form-control" placeholder="物品标题、描述...">
-            </div>
-            <button type="submit" class="btn btn-default">搜索</button>
-        </form>
+          <a class="navbar-brand" href="/">个人租借平台后台管理</a>
         </div>
         <div id="navbar">
           <ul class="nav navbar-nav navbar-right">
-            @if (Auth::guest())
-              <li><a href="{{ url('/auth/login') }}">登 录</a></li>
-              <li><a href="{{ url('/auth/register') }}">注 册</a></li>
-            @else
-              <li><a href="{{ url('/user/index') }}">个人资料</a></li>
-              <li><a href="{{ url('/user/goods') }}">我的发布</a></li>
-              <li><a href="{{ url('/user/follow') }}">我的关注</a></li>
-              <li><a href="{{ url('/user/history') }}">浏览历史</a></li>
-              <li><a href="{{ url('/user/password') }}">修改密码</a></li>
               <li><a href="{{ url('/auth/logout') }}">{{ Auth::user()->name }} 退出</a></li>            
-            @endif              
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->
