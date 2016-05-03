@@ -90,6 +90,20 @@
 		<div class="history-wrapper white-block">
 			<div class="row">
 				@foreach($histories as $history)
+					@if(empty($history->goods->id))
+					<div class="col-md-3">
+						<a href="#">
+							<img class="goods-cover" src="/images/default.jpeg" alt="封面图">
+						</a>
+						<p class="goods-title"><a href="#">物品已不存在</a></p>
+						<p class="goods-price"><span class="price">-.--</span>&nbsp;&nbsp;&nbsp;&nbsp;/每天</p>
+						<div class="goods-time"><span>{{ substr($history->created_at, 0, 10) }}</span><span class="text-right">{{ substr($history->created_at, 11) }}</span></div>
+						<p class="goods-control">
+							<form method="post" action=""><button type="submit" disabled="disabled">加入关注</button></form>
+							<form method="post"  class="text-right" action="/user/faviroute/{{ $history->goods_id }}/delete"><button type="submit">删除记录</button></form>
+						</p>
+					</div>					
+					@else
 					<div class="col-md-3">
 						<a href="/goods/{{ $history->goods->id }}">
 							<img class="goods-cover" src="/images/{{ $history->goods->cover }}" alt="封面图">
@@ -101,7 +115,9 @@
 							<form method="post" action="/user/faviroute/{{ $history->goods->id }}/follow"><button type="submit">加入关注</button></form>
 							<form method="post"  class="text-right" action="/user/faviroute/{{ $history->goods->id }}/delete"><button type="submit">删除记录</button></form>
 						</p>
-					</div>
+					</div>					
+					@endif
+
 				@endforeach
 			</div>
 		</div>

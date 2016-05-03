@@ -87,6 +87,26 @@
 		<div class="history-wrapper white-block">
 			<div class="row">
 				@foreach($follows as $follow)
+					@if(empty($follow->goods->id))
+					<div class="col-md-3">
+						<a href="/goods/{{ $follow->goods_id }}">
+							<img class="goods-cover" src="/images/default.jpeg" alt="封面图">
+						</a>
+						<p class="goods-title">
+							<a href="/goods/{{ $follow->goods_id }}">物品已不存在</a>
+						</p>
+						<p class="goods-price"><span class="price">-.--</span>&nbsp;&nbsp;&nbsp;&nbsp;/每天</p>
+						<div class="goods-time">
+							<span>{{ substr($follow->created_at, 0, 10) }}</span>
+							<span class="text-right">{{ substr($follow->created_at, 11) }}</span>
+						</div>
+						<p class="goods-control">
+							<form method="post" action="/user/faviroute/{{ $follow->goods_id }}/unfollow">
+								<button type="submit">取消关注</button>
+							</form>
+						</p>
+					</div>					
+					@else
 					<div class="col-md-3">
 						<a href="/goods/{{ $follow->goods->id }}">
 							<img class="goods-cover" src="/images/{{ $follow->goods->cover }}" alt="封面图">
@@ -105,6 +125,7 @@
 							</form>
 						</p>
 					</div>
+					@endif
 				@endforeach
 
 			</div>

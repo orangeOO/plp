@@ -33,7 +33,7 @@ class UserController extends Controller {
 	 * @return Response
 	 */
 	public function anyHistory() {
-		$histories = Faviroute::whereRaw('user_id = ? and type = 0', [Auth::user()->id])->orderBy('id', 'desc')->get();
+		$histories = Faviroute::whereRaw('user_id = ? and type = 0', [Auth::user()->id])->orderBy('updated_at', 'desc')->get();
 		return view('user/history')->withHistories($histories);
 	}
 
@@ -43,7 +43,7 @@ class UserController extends Controller {
 	 * @return Response
 	 */
 	public function anyFollow() {
-		$follows = Faviroute::whereRaw('user_id = ? and type = 1', [Auth::user()->id])->orderBy('updated_at, created_at', 'desc')->get();
+		$follows = Faviroute::whereRaw('user_id = ? and type = 1', [Auth::user()->id])->orderBy('updated_at', 'desc')->get();
 		return view('user/follow')->withFollows($follows);
 	}
 

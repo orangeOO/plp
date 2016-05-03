@@ -14,7 +14,7 @@ use Auth, Input, Redirect;
 class GoodsController extends Controller {
 
 	public function __construct() {
-		$this->middleware('auth', ['except' => ['index', 'show']]);	//必须登录
+		$this->middleware('auth', ['except' => ['index', 'show','search']]);	//必须登录
 	}
 
 	/**
