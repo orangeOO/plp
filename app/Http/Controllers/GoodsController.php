@@ -14,7 +14,7 @@ use Auth, Input, Redirect;
 class GoodsController extends Controller {
 
 	public function __construct() {
-		$this->middleware('auth');	//必须登录
+		$this->middleware('auth', ['except' => ['index', 'show']]);	//必须登录
 	}
 
 	/**
@@ -25,6 +25,9 @@ class GoodsController extends Controller {
 	 */
 	public function index($typeid=null)
 	{
+		if(Auth::check() && Auth::user()->email == 'admin@plp.com') {
+			return Redirect::to('admin');
+		}
 		//有分类id时，只显示此分类的物品。status=0代表物品已上架
 		if(empty($typeid)) {
 			$type = Type::find(1);
@@ -106,22 +109,25 @@ class GoodsController extends Controller {
 	{
 		$goods = Goods::find($id);
 		if(empty($goods)) {
-			return Redirect::to('/');
+			return '你访问的物品不存在或已被删除，点击<a href="/">回到首页</a>';
 		}
 
-		//访问量加1
-		$goods->hits = $goods->hits + 1;
-		$goods->save();
+		//如果已登录
+		if(Auth::check()) {
+			//访问量加1
+			$goods->hits = $goods->hits + 1;
+			$goods->save();		
 
-		//为当前用户添加浏览历史记录
-		$history = Faviroute::whereRaw('user_id = ? and goods_id = ? and type = 0', [Auth::user()->id, $id])->first();
-		if(!empty($history)) {		//如果已存在此浏览记录，更新浏览时间
-			$history->update();		
-		} else {					//否则新建条记录
-			$history = new Faviroute;
-			$history->user_id = Auth::user()->id;
-			$history->goods_id = $id;
-			$history->save();
+			//为当前用户添加浏览历史记录
+			$history = Faviroute::whereRaw('user_id = ? and goods_id = ? and type = 0', [Auth::user()->id, $id])->first();
+			if(!empty($history)) {		//如果已存在此浏览记录，更新浏览时间
+				$history->update();		
+			} else {					//否则新建条记录
+				$history = new Faviroute;
+				$history->user_id = Auth::user()->id;
+				$history->goods_id = $id;
+				$history->save();
+			}	
 		}
 
 		return view('goods')->withGoods($goods);

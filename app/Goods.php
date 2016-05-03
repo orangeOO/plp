@@ -24,8 +24,11 @@ class Goods extends Model {
 
 	//判断当前用户是否关注了本物品
 	public function isFocused() {
-		$result = Faviroute::whereRaw('user_id = ? and goods_id = ? and type = 1 ', [Auth::user()->id, $this->id])->first();
-		return empty($result);
+		if(Auth::check()) {
+			$result = Faviroute::whereRaw('user_id = ? and goods_id = ? and type = 1 ', [Auth::user()->id, $this->id])->first();
+			return empty($result);			
+		}
+		return true;
 	}
 
 

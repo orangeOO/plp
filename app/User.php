@@ -32,6 +32,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected $hidden = ['password', 'remember_token'];
 
 	public function info() {
+		if(empty(Userinfo::where('user_id', '=', $this->id)->count())) {
+			$userinfo = new Userinfo;
+			$userinfo->user_id = $this->id;
+			$userinfo->save();
+		}
 		return $this->hasOne('App\Userinfo', 'user_id');
 	}
 

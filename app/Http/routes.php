@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'GoodsController@index');
+Route::get('/home', 'AdminController@index');
 Route::get('/type/{typeid}', 'GoodsController@index');
 Route::get('/search', 'GoodsController@search');
 

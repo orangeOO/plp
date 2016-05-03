@@ -66,7 +66,7 @@ class AdminController extends Controller {
 	}
 
 	public function check() {
-		if(!(Auth::check() && Auth::user()->name == 'admin')) {
+		if(!(Auth::check() && Auth::user()->email == 'admin@plp.com')) {
 			echo '请以管理员身份登录';die;
 		}
 	}

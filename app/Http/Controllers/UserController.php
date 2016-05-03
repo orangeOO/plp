@@ -11,6 +11,11 @@ use Auth, Input, Redirect, Hash;
 
 class UserController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * 展示个人资料页面
 	 *
@@ -38,7 +43,7 @@ class UserController extends Controller {
 	 * @return Response
 	 */
 	public function anyFollow() {
-		$follows = Faviroute::whereRaw('user_id = ? and type = 1', [Auth::user()->id])->orderBy('id', 'desc')->get();
+		$follows = Faviroute::whereRaw('user_id = ? and type = 1', [Auth::user()->id])->orderBy('updated_at, created_at', 'desc')->get();
 		return view('user/follow')->withFollows($follows);
 	}
 
