@@ -122,6 +122,11 @@
     background-color: #e4393c;
     /*border-radius: 1px;*/
   }
+  .item img{
+    width: 750px;
+    height: 421px !important;
+    object-fit: cover;
+  }
 
 </style>
 
@@ -164,62 +169,15 @@
       <hr>
       <p>{{ $goods->description }}</p>
     </div>
-
-   <!--  <div class="comments">
-      <h3>留言</h3>
-      <hr>
-
-      <div class="well well-lg">
-        <img width="64px" height="64px" src="/images/default.jpeg">
-        <textarea placeholder="我也来说两句..."></textarea>
-        <div class="text-right">
-          <button>留言</button>
-        </div>
-      </div>
-
-      <div class="media">
-        <div class="media-left media-middle">
-          <a href="#">
-            <img width="48px" height="48px" class="media-object" src="/images/default.jpeg" alt="...">
-          </a>
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading">abcdefg  包邮到付</h4>
-          <p><span class="created-time">2016-04-06 13:25:21</span><span class="reply-button"><a href="">回复</a></span></p>
-        </div>
-      </div>
-
-      <div class="media">
-        <div class="media-left media-middle">
-          <a href="#">
-            <img width="48px" height="48px" class="media-object" src="/images/default.jpeg" alt="...">
-          </a>
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading">2333 回复 abcedfg  没问题</h4>
-          <p><span class="created-time">2016-04-06 13:25:21</span><span class="reply-button"><a href="">回复</a></span></p>
-        </div>
-      </div>
-
-      <div class="media">
-        <div class="media-left media-middle">
-          <a href="#">
-            <img width="48px" height="48px" class="media-object" src="/images/default.jpeg" alt="...">
-          </a>
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading">哈哈哈  能少点吗</h4>
-          <p><span class="created-time">2016-04-06 13:25:21</span><span class="reply-button"><a href="">回复</a></span></p>
-        </div>
-      </div>
-    </div> -->
-
   </div>
 
   <div class="col-xs-4 info">
     <h3 class="goods-title">{{ $goods->title }}</h3>
+    @if($goods->status==1)
+    <b class="price">（已下架）</b>
+    @endif
     <ul class="trade-info">
-      <li><span class="left" >出&nbsp;&nbsp;租&nbsp;&nbsp;价：</span><b class="price-mark">￥</b><span class="price">{{ $goods->price }}.00</span> /每天</li>
+      <li><span class="left" >出&nbsp;&nbsp;租&nbsp;&nbsp;价：</span><b class="price-mark">￥</b><span class="price">{{ $goods->price }}</span> /每天</li>
       <li><span class="left" >期&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;限：</span>{{ $goods->term }}天</li>
       <hr>
       <li><span class="left" >所&nbsp;&nbsp;在&nbsp;&nbsp;地：</span>{{ $goods->user->info->province }}{{ $goods->user->info->city }}&nbsp;&nbsp;&nbsp;&nbsp;{{ $goods->user->info->area }}</li>

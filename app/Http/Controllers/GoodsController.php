@@ -14,7 +14,7 @@ use Auth, Input, Redirect;
 class GoodsController extends Controller {
 
 	public function __construct() {
-		$this->middleware('auth', ['except' => ['index', 'show','search']]);	//必须登录
+		$this->middleware('auth', ['except' => ['index', 'show','search']]);	//浏览查看商品搜索商品无需登录，其他必须登录
 	}
 
 	/**
@@ -79,7 +79,7 @@ class GoodsController extends Controller {
 		if($goods->save()) {
 			return Redirect::to('user/goods');
 		} else {
-			return Redirect::back()->withInput()->withErrors('更新失败！');
+			return Redirect::back()->withInput()->withErrors('发布失败！');
 		}
 	}
 
@@ -193,14 +193,34 @@ class GoodsController extends Controller {
 	{
 		$goods = Goods::find($id);
 		$goods->delete();
-		return Redirect::back()->withInfo('成功删除了一个物品');
+		return Redirect::back();
 	}
 
 	public function search() {
 		$keyword = Input::get('key', '');
 		$searchword = '%' . $keyword . '%';
-		$results = Goods::whereRaw('title like ? or description like ?', [$searchword, $searchword])->get();
+		$results1 = Goods::whereRaw('title like ?', [$searchword])->get();
+		$results2 = Goods::whereRaw('description like ?', [$searchword])->get();
+		$ids1=[];
+		$results = [];
+		foreach ($results1 as $val) {
+			$ids1[]=$val->id;
+		}
+		foreach($results2 as $val) {
+			if(in_array($val->id,$ids1)) {
+				$results[] = $val;
+			}
+		}
+		foreach ($results1 as $val) {
+			if(!in_array($val,$results)){
+				$results[]=$val;
+			}
+		}
+		foreach ($results2 as $val) {
+			if(!in_array($val,$results)){
+				$results[]=$val;
+			}
+		}
 		return view('search')->withGoodses($results)->withKeyword($keyword);
 	}
-
 }

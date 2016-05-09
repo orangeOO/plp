@@ -19,7 +19,7 @@ class CreateGoodsTable extends Migration {
 			$table->string('title');
 			$table->string('cover');
 			$table->string('description');
-			$table->integer('price');
+			$table->double('price');
 			$table->integer('term');
 			$table->integer('type');
 			$table->tinyInteger('status');

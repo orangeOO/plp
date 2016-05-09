@@ -27,7 +27,7 @@
               <input name="key" type="text" class="form-control" placeholder="物品标题、描述...">
             </div>
             <button type="submit" class="btn btn-default">搜索</button>
-        </form>
+          </form>
         </div>
         <div id="navbar">
           <ul class="nav navbar-nav navbar-right">

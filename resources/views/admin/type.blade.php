@@ -96,7 +96,6 @@
 		</div>
 	
 		<div class="goods-wrapper white-block">
-			<form method="post" action="/user/reset">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
@@ -122,15 +121,14 @@
 						@endforeach
 					</tbody>
 				</table>
-			</form>
 
 			<form method="POST" action="/admin/addtype" class="form-inline">
 			  <div class="form-group">
-			    <label for="exampleInputName2">分类名</label>
+			    <label>分类名</label>
 			    <input name="name" type="text">
 			  </div>
 			  <div class="form-group">
-			    <label for="exampleInputEmail2">描述</label>
+			    <label>描述</label>
 			    <input name="description" type="text">
 			  </div>
 			  <button type="submit" >添加</button>

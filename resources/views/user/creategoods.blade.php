@@ -110,7 +110,7 @@
 				<p><span class="left">价格：</span><input name="price" type="text" placeholder=""> 每天</p>
 				<p><span class="left">租期：</span><input name="term" type="text" placeholder=""> 天</p>
 				<p><span class="left">封面图：</span><input name="cover" type="file"><span class="hint">单张图片，作为物品展示的封面图，显示在首页</span></p>
-				<p><span class="left">补充图片：</span><input name="images[]" multiple type="file"><span class="hint">可多选，将展示在物品详情页里面</span></p>
+				<p><span class="left">补充图片：</span><input name="images[]" multiple type="file"><span class="hint">按住Ctrl可多选，将展示在物品详情页里面</span></p>
 				<button class="submit" type="submit">发布</button>
 			</form>
 		</div>

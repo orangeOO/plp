@@ -96,7 +96,6 @@
 		</div>
 	
 		<div class="goods-wrapper white-block">
-			<form method="post" action="/user/reset">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
@@ -121,7 +120,6 @@
 						@endforeach
 					</tbody>
 				</table>
-			</form>
 		</div>
 	</div>
 </div>

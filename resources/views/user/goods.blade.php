@@ -156,7 +156,6 @@
 		</div>
 
 		<div class="goods-wrapper white-block">
-			<p class="bg-info">{{ $info or '' }}</p>
 			@foreach($goodses as $goods)
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -172,7 +171,7 @@
 							<p><a href="/goods/{{ $goods->id }}">{{ $goods->title }}</a></p>
 						</div>
 						<div class="price text-center">
-							<p>{{ $goods->price }}.00元 /每天</p>
+							<p>{{ $goods->price }}元 /每天</p>
 						</div>
 						<div class="term text-center">
 							<p>租期 {{ $goods->term }}天</p>

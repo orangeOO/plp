@@ -112,11 +112,11 @@
 					</select>
 				</p>
 				<p class="description"><span class="left">描述：</span><textarea name="description" placeholder="请在这里描述将要出租的物品的详情信息。以及其它关于本次交易的要求。如果有额外要展示的信息，也请一并写在这里。">{{ $goods->description }}</textarea></p>
-				<p><span class="left">价格：</span><input name="price" type="text" value="{{ $goods->price }}.00" placeholder=""> 每天</p>
+				<p><span class="left">价格：</span><input name="price" type="text" value="{{ $goods->price }}" placeholder=""> 每天</p>
 				<p><span class="left">租期：</span><input name="term" type="text" value="{{ $goods->term }}" placeholder=""> 天</p>
 				<p><span class="left">封面图：</span><input name="cover" type="file"><span class="hint">单张图片，作为物品展示的封面图，显示在首页</span></p>
-				<p><span class="left">补充图片：</span><input name="images[]" multiple type="file"><span class="hint">可多选，将展示在物品详情页里面</span></p>
-				<button class="submit" type="submit">发布</button>
+				<p><span class="left">补充图片：</span><input name="images[]" multiple type="file"><span class="hint">按住Ctrl可多选，将展示在物品详情页里面</span></p>
+				<button class="submit" type="submit">更新</button>
 			</form>
 		</div>
 	</div>

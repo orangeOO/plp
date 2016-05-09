@@ -96,7 +96,6 @@
 		</div>
 	
 		<div class="goods-wrapper white-block">
-			<form method="post" action="/user/reset">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
@@ -118,7 +117,7 @@
 							<th>{{ $goods->id }}</th>
 							<td>{{ $goods->title }}</td>
 							<td>{{ str_limit($goods->description, 10) }}</td>
-							<td>{{ '￥' . $goods->price . '.00' }}</td>
+							<td>{{ '￥' . $goods->price }}</td>
 							<td>{{ $goods->term . '天' }}</td>
 							<td>{{ $goods->typeinfo->name }}</td>
 							<td>{{ $goods->status == 0 ? '已发布' : '已下架' }}</td>
@@ -132,7 +131,6 @@
 						@endforeach
 					</tbody>
 				</table>
-			</form>
 		</div>
 	</div>
 </div>

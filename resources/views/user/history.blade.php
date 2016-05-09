@@ -109,7 +109,7 @@
 							<img class="goods-cover" src="/images/{{ $history->goods->cover }}" alt="封面图">
 						</a>
 						<p class="goods-title"><a href="/goods/{{ $history->goods->id }}">{{ $history->goods->title }}</a></p>
-						<p class="goods-price"><span class="price">{{ $history->goods->price }}.00</span>&nbsp;&nbsp;&nbsp;&nbsp;/每天</p>
+						<p class="goods-price"><span class="price">{{ $history->goods->price }}</span>&nbsp;&nbsp;&nbsp;&nbsp;/每天</p>
 						<div class="goods-time"><span>{{ substr($history->created_at, 0, 10) }}</span><span class="text-right">{{ substr($history->created_at, 11) }}</span></div>
 						<p class="goods-control">
 							<form method="post" action="/user/faviroute/{{ $history->goods->id }}/follow"><button type="submit">加入关注</button></form>

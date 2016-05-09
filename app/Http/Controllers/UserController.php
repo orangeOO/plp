@@ -52,7 +52,7 @@ class UserController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function anyGoods(Request $request) {
+	public function anyGoods() {
 		$goodses = Goods::where('user_id', '=', Auth::user()->id)->get();
 		return view('user/goods')->withGoodses($goodses);
 	}
@@ -84,7 +84,7 @@ class UserController extends Controller {
 	 * @return Response
 	 */
 	public function anyUpdate($id) {
-		$userinfo = Userinfo::find(Auth::user()->id);
+		$userinfo = Userinfo::where('user_id', '=', $id);
 		if($userinfo->update(Input::all())) {
 			if(!empty(Input::file('headimg'))) {		//是否修改了头像
 				$userinfo->headimg = $this->storeimage(Input::file('headimg'));
@@ -104,11 +104,13 @@ class UserController extends Controller {
 	public function anyReset() {
 		$user = Auth::user();
 		if(Input::get('new_password') == Input::get('re_password')) {		//如果新密码和确认密码相同
-			if (Auth::attempt(['email' => $user->email, 'password' => Input::get('old_password')])) {	//如果原始密码正确
+			if (Auth::attempt(['email' => $user->email, 'password' => Input::get('old_password')])) {	//尝试登录,验证用户名和密码对不对
 				$user->password = Hash::make(Input::get('new_password'));
 				$user->save();
 				return Redirect::back();
 			}
+			else
+				return Redirect::to('auth/logout');
 		}
 	}
 
@@ -119,7 +121,7 @@ class UserController extends Controller {
 	 */
 	public function anyFaviroute($id, $action) {
 		if($action == 'follow') {			//关注
-			if(empty(Faviroute::find($id))) {
+			if(empty(Faviroute::whereRaw('user_id=? and goods_id=? and type=1',[Auth::user()->id,$id])->count())) {
 				$faviroute = new Faviroute;
 				$faviroute->user_id = Auth::user()->id;
 				$faviroute->goods_id = $id;

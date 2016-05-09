@@ -40,6 +40,7 @@ class AdminController extends Controller {
 	}
 
 	public function postAddtype() {
+		$this->check();
 		$type = new Type;
 		$type->name = Input::get('name');
 		$type->description = Input::get('description');
@@ -48,16 +49,19 @@ class AdminController extends Controller {
 	}
 
 	public function anyDeltype() {
+		$this->check();
 		$type = Type::find(Input::get('id'));
 		$type->delete();
 		return Redirect::back();
 	}
 
 	public function anyEdittype() {
+		$this->check();
 		return view('admin.edit')->withType(Type::find(Input::get('id')));
 	}
 
 	public function anyDoedittype() {
+		$this->check();
 		$type = Type::find(Input::get('id'));
 		$type->name = Input::get('name');
 		$type->description = Input::get('description');

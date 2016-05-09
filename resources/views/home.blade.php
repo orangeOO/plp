@@ -6,10 +6,32 @@
   h2.goods-title{
     font-size: 18px;
   }
+  .thumb{
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .thumb>img{
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+  }
+  .description{
+    word-wrap: break-word;
+    word-break: break-all;
+    display: inline-block;
+    width: 250px;
+  }
+  .box{
+    height: 343px;
+  }
 </style>
 <div class="row row-offcanvas row-offcanvas-right">
 
-  <div class="col-xs-12 col-sm-9">
+  <div class="col-sm-9">
     <p class="pull-right visible-xs">
       <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
     </p>
@@ -25,12 +47,12 @@
     <div class="row">
       
       @foreach($goodses as $goods)
-        <div class="col-xs-6 col-lg-4">
+        <div class="col-lg-4 box">
           <h2 class="goods-title">{{ $goods->title }}</h2>
-          <a href="/goods/{{ $goods->id }}" class="thumbnail">
+          <a href="/goods/{{ $goods->id }}" class="thumb">
             <img src="/images/{{ $goods->cover }}" alt="{{ $goods->title }}">
           </a>
-          <p>{{ mb_strimwidth($goods->description, 0, 100, '...', 'utf-8') }}</p>
+          <p class="description">{{ mb_strimwidth($goods->description, 0, 100, '...', 'utf-8') }}</p>
           <p><a class="btn btn-default" href="/goods/{{ $goods->id }}" role="button">查看详情 &raquo;</a></p>
         </div><!--/.col-xs-6.col-lg-4-->
       @endforeach
@@ -38,7 +60,7 @@
     </div><!--/row-->
   </div><!--/.col-xs-12.col-sm-9-->
 
-  <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+  <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
     <div class="list-group">
       @foreach($types as $type)
         <a href="{{ $type->id == 1 ? '/' : '/type/'.$type->id }}" class="list-group-item {{ $type->id == $current_type->id ? 'active' : '' }}">{{ $type->name }}</a>
